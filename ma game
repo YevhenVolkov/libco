@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple 2D Game</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+
+        canvas {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="gameCanvas" width="800" height="600"></canvas>
+
+    <script>
+        const canvas = document.getElementById("gameCanvas");
+        const ctx = canvas.getContext("2d");
+
+        // Player object
+        const player = {
+            x: 50,
+            y: 50,
+            width: 20,
+            height: 20,
+            color: "#00F",
+            speed: 5,
+        };
+
+        // Update function
+        function update() {
+            // Move player with arrow keys
+            window.addEventListener("keydown", (e) => {
+                switch (e.key) {
+                    case "ArrowUp":
+                        player.y -= player.speed;
+                        break;
+                    case "ArrowDown":
+                        player.y += player.speed;
+                        break;
+                    case "ArrowLeft":
+                        player.x -= player.speed;
+                        break;
+                    case "ArrowRight":
+                        player.x += player.speed;
+                        break;
+                }
+            });
+
+            // Draw player
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = player.color;
+            ctx.fillRect(player.x, player.y, player.width, player.height);
+
+            // Request the next animation frame
+            requestAnimationFrame(update);
+        }
+
+        // Start the game loop
+        update();
+    </script>
+</body>
+</html>
